@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="./output.css" rel="stylesheet">
+    <title>Job Application Tracker</title>
+</head>
+<body>
+    <form action="" id="application-form" class="flex flex-col gap-2">
+        <label for="">
+            Company name*:
+            <input 
+            type="text"
+            placeholder="Enter company name..."  
+            id="company-name"
+            required
+            >
+        </label>
+
+          <label for="">
+            Job title*:
+            <input 
+            type="text"
+            id="job-title"
+            placeholder="Enter job title..." 
+            required 
+            >
+          </label>
+
+          <label for="">
+            Application date:
+            <input 
+            type="date"
+            name="" 
+            id="form-date">
+          </label>
+
+          <label for="">
+            Status:
+            <select name="status" id="status">
+                <option value="select">Select</option>
+                <option value="applied">Applied</option>
+                <option value="interview">Interview</option>
+                <option value="rejected">Rejected</option>
+                <option value="offer">Offer</option>
+            </select>
+          </label>
+
+          <label for="">
+            Notes: 
+            <textarea name="" id="form-notes" placeholder="additional comment(s)">
+
+            </textarea>
+          </label>
+
+          <button type="submit" id="submit-btn" class="border max-w-25">Submit</button>
+    </form>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>

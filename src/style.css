@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+body{
+    background-color: indigo;
+    padding: 12px;
+    display: grid;
+}
+
+form{
+    border: 1px solid #000;
+    padding: 1em;
+    max-width: fit-content;
+    margin: auto;
+}
+
+input{
+    outline: none;
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+select{
+    outline: none;
+    border: 1px solid black;
+    padding: 0.2em;
+}
+
+textarea{
+    display: block;
+    border: 1px solid #000;
+}
