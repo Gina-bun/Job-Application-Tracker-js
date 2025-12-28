@@ -33,12 +33,12 @@
             <input 
             type="date"
             name="" 
-            id="form-date">
+            id="application-date">
           </label>
 
           <label for="">
             Status:
-            <select name="status" id="status">
+            <select name="status" id="status-select">
                 <option value="select">Select</option>
                 <option value="applied">Applied</option>
                 <option value="interview">Interview</option>
@@ -49,13 +49,15 @@
 
           <label for="">
             Notes: 
-            <textarea name="" id="form-notes" placeholder="additional comment(s)">
+            <textarea name="" id="application-notes" placeholder="additional comment(s)">
 
             </textarea>
           </label>
 
           <button type="submit" id="submit-btn" class="border max-w-25">Submit</button>
     </form>
+
+    <div id="applications-container"></div>
 
 
     <script src="./script.js"></script>
