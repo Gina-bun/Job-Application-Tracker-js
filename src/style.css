@@ -41,7 +41,7 @@ textarea{
     gap: 1em;
 }
 
-.jobItem{
+.jobItem, .savedJobItem{
     border: 1px solid black;
     display: flex;
     justify-content: space-between;

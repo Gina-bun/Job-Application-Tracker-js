@@ -6,17 +6,51 @@ const status = document.getElementById("status-select");
 const notes = document.getElementById("application-notes");
 const applicationsContainer = document.getElementById("applications-container");
 
-const jobApplications = [];
+// const jobApplications = [];
 
 //on page load, the saved job applications are loaded
-const savedJobApp = JSON.parse(localStorage.getItem('jobApplications'))
-console.log(savedJobApp)
+const jobApplications = JSON.parse(localStorage.getItem('jobApplications'))
 
 //creating container for saved job applications
-const savedJobItem = document.createElement("div")
-savedJobItem.classList.add('savedJobItem')
+jobApplications.forEach((job) => {
+    const savedJob = document.createElement("div") 
+    savedJob.classList.add('savedJobItem')
+    
+    //saved job item properties
+    const theCompanyName = document.createElement("p")
+    theCompanyName.textContent = job.companyName
 
-savedJobItem.textContent = savedJobApp.map((job) => job.companyName)
+    const jobName = document.createElement("p")
+    jobName.textContent = job.jobTitle
+
+     const theDateApplied = document.createElement("p")
+     theDateApplied.textContent = job.date
+
+      const appStatus = document.createElement("p")
+    appStatus.textContent = job.status
+
+    //Delete and edit buttons
+  const theEditBtn = document.createElement("button")
+  theEditBtn.classList.add('editBtn')
+  theEditBtn.textContent = "Edit"
+
+  const theDeleteBtn = document.createElement("button")
+  theDeleteBtn.classList.add('deleteBtn')
+  theDeleteBtn.textContent = "Delete"
+
+    //appending properties to saved job item
+    savedJob.appendChild(theCompanyName)
+    savedJob.appendChild(jobName)
+    savedJob.appendChild(theDateApplied)
+    savedJob.appendChild(appStatus)
+
+    //appending edit and delete button
+    savedJob.appendChild(theEditBtn)
+    savedJob.appendChild(theDeleteBtn)
+    
+    //appending job item to container
+    applicationsContainer.appendChild(savedJob)
+})
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
