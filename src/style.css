@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 body{
     background-color: indigo;
@@ -29,3 +33,36 @@ textarea{
     display: block;
     border: 1px solid #000;
 }
+
+.jobApp-container{
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.jobItem{
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em .5em ;
+}
+
+.editBtn, .deleteBtn{
+    border: 1px solid #000;
+    padding: .2em;
+    width: 55px;
+    border-radius: 8px;
+}
+
+.editBtn{
+    background-color: blue;
+
+}
+
+.deleteBtn{
+    background-color: rgb(142, 47, 47);
+}
+
+
+
