@@ -48,7 +48,7 @@ textarea{
     padding: 1em .5em ;
 }
 
-.editBtn, .deleteBtn{
+.editBtn, .deleteBtn, .saveBtn{
     border: 1px solid #000;
     padding: .2em;
     width: 55px;
@@ -58,6 +58,10 @@ textarea{
 .editBtn{
     background-color: rgb(10, 10, 209);
 
+}
+
+.saveBtn{
+    background-color: rgb(24, 86, 31);
 }
 
 .deleteBtn{
