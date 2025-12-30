@@ -6,15 +6,17 @@ const status = document.getElementById("status-select");
 const notes = document.getElementById("application-notes");
 const applicationsContainer = document.getElementById("applications-container");
 
+
 // const jobApplications = [];
 
 //on page load, the saved job applications are loaded
-const jobApplications = JSON.parse(localStorage.getItem('jobApplications'))
+const jobApplications = JSON.parse(localStorage.getItem('jobApplications')) 
 
 //creating container for saved job applications
 jobApplications.forEach((job) => {
     const savedJob = document.createElement("div") 
     savedJob.classList.add('savedJobItem')
+    savedJob.id = job.id
     
     //saved job item properties
     const theCompanyName = document.createElement("p")
@@ -26,7 +28,7 @@ jobApplications.forEach((job) => {
      const theDateApplied = document.createElement("p")
      theDateApplied.textContent = job.date
 
-      const appStatus = document.createElement("p")
+      let appStatus = document.createElement("p")
     appStatus.textContent = job.status
 
     //Delete and edit buttons
@@ -50,7 +52,12 @@ jobApplications.forEach((job) => {
     
     //appending job item to container
     applicationsContainer.appendChild(savedJob)
+
+    
+
 })
+
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -76,9 +83,9 @@ form.addEventListener("submit", (e) => {
  localStorage.setItem('jobApplications', JSON.stringify(jobApplications))
 
   //one job application
-  const jobItem = document.createElement("div");
+  const jobItem = document.createElement("div")
   jobItem.classList.add('jobItem')
-  jobItem.id = newJobApplication.id;
+  jobItem.id = newJobApplication.id
   
   //job application properties (individual)
   const jobCompany = document.createElement("p")
@@ -118,3 +125,66 @@ form.addEventListener("submit", (e) => {
   console.log(newCompanyName);
   console.log("submitted!!!");
 });
+
+  
+
+      //edit feature 
+    //grabbing edit button
+   
+     applicationsContainer.addEventListener("click", (e)=>{
+      //check if edit button is clicked
+      if (!e.target.classList.contains("editBtn")) return
+
+      
+
+      //find the job container
+      const jobItem = e.target.closest(".jobItem, .savedJobItem")
+
+      //edit button becomes save button
+      const clickedEdidButton = jobItem.querySelector("button:nth-of-type(1)")
+      const saveBtn = document.createElement("button")//new save button
+      saveBtn.textContent = "save"
+      saveBtn.classList.add("saveBtn")
+
+      clickedEdidButton.replaceWith(saveBtn)
+
+      //get job id
+      const jobId = jobItem.id
+
+      //find matching job object
+      const job = jobApplications.find((job) => job.id === jobId)
+      
+
+      const select = document.createElement("select")
+      const selectOption = document.createElement("option")
+      selectOption.textContent = "Select"
+
+      const appliedOption = document.createElement("option")
+      appliedOption.textContent = "Applied"
+
+      const interviewOption = document.createElement("option")
+      interviewOption.textContent = "Interview"
+
+      const rejectedOption = document.createElement("option")
+      rejectedOption.textContent = "Rejected"
+
+      const offerOption = document.createElement("option")
+      offerOption.textContent = "Offer" 
+
+
+
+      select.appendChild(selectOption)
+      select.appendChild(appliedOption)
+      select.appendChild(interviewOption)
+      select.appendChild(rejectedOption)
+      select.appendChild(offerOption)
+
+      //grabbing job item status
+      const oldStatusElement = jobItem.querySelector("p:nth-of-type(4)")
+      // console.log(oldStatusElement)
+
+      oldStatusElement.replaceWith(select)
+      
+    })
+
+
