@@ -210,4 +210,29 @@ applicationsContainer.addEventListener("click", (e) => {
   clickedSaveButton.replaceWith(editBtn);
 });
 
+//delete feature
+applicationsContainer.addEventListener("click", (e) => {
+  if(!e.target.classList.contains("deleteBtn")) return
 
+  //get job item
+  const jobItem = e.target.closest(".jobItem, .savedJobItem")
+
+  //get job id
+  const jobId = jobItem.id
+
+  //find matching job object
+  const job = jobApplications.find((job) => job.id === jobId)
+
+  //remove job obj from job application array
+  const index = jobApplications.indexOf(job)
+
+  if (index !== -1){
+    jobApplications.splice(index, 1)
+  }
+
+  //update in localStorage
+  localStorage.setItem("jobApplications", JSON.stringify(jobApplications))
+
+  //update UI to show deletion
+  jobItem.remove()
+})
