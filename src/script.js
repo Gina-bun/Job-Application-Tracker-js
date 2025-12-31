@@ -51,6 +51,7 @@ function handleSearchFilter(e) {
   console.log("input changed!!!!");
 
   let searchInput = e.target.value;
+  //render full job application list if search bar is empty
   if (!searchInput) {
     renderSavedApplications();
     return;
@@ -60,6 +61,11 @@ function handleSearchFilter(e) {
   const matchingJobs = jobApplications.filter((job) =>
     job.companyName.toLowerCase().includes(searchInput.toLowerCase())
   );
+
+   if(matchingJobs.length === 0) {
+      applicationsContainer.innerHTML = "<p>No matching job applications found</p>"
+      return
+  } 
 
   applicationsContainer.innerHTML = ""; //empty the job application containser
 
