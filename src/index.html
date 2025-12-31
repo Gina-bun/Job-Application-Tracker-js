@@ -1,76 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="./output.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
     <title>Job Application Tracker</title>
-</head>
-<body>
-   <header>
-    <button id="newApp" class="newApp">New Job Application <span>+</span></button>
-   </header>
-    <form action="" id="application-form" class="flex flex-col gap-2">
-        <label for="">
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <button id="newApp" class="newApp">
+        New Job Application <span>+</span>
+      </button>
+    </header>
+
+    <!-- Modal or pop-up form -->
+    <div id="jobModal" class="jobModal">
+      <div class="modal-content">
+        <h2>Add Job Application</h2>
+        <!-- the form itself -->
+        <form action="" id="application-form" class="flex flex-col gap-2">
+          <label for="">
             Company name*:
-            <input 
-            type="text"
-            placeholder="Enter company name..."  
-            id="company-name"
-            required
-            >
-        </label>
+            <input
+              type="text"
+              placeholder="Enter company name..."
+              id="company-name"
+              required
+            />
+          </label>
 
           <label for="">
             Job title*:
-            <input 
-            type="text"
-            id="job-title"
-            placeholder="Enter job title..." 
-            required 
-            >
+            <input
+              type="text"
+              id="job-title"
+              placeholder="Enter job title..."
+              required
+            />
           </label>
 
           <label for="">
             Application date:
-            <input 
-            type="date"
-            name="" 
-            id="application-date">
+            <input type="date" name="" id="application-date" />
           </label>
 
           <label for="">
             Status:
             <select name="status" id="status-select">
-                <option value="select">Select</option>
-                <option value="applied">Applied</option>
-                <option value="interview">Interview</option>
-                <option value="rejected">Rejected</option>
-                <option value="offer">Offer</option>
+              <option value="select">Select</option>
+              <option value="applied">Applied</option>
+              <option value="interview">Interview</option>
+              <option value="rejected">Rejected</option>
+              <option value="offer">Offer</option>
             </select>
           </label>
 
           <label for="">
-            Notes: 
-            <textarea name="" id="application-notes" placeholder="additional comment(s)">
-
+            Notes:
+            <textarea
+              name=""
+              id="application-notes"
+              placeholder="additional comment(s)"
+            >
             </textarea>
           </label>
 
-          <button type="submit" id="submit-btn" class="border max-w-25">Save</button>
-    </form>
+            <button type="submit" id="submit-btn" class="border max-w-fit px-2">
+              Save
+            </button>
+
+        </form>
+        <button class="closeBtn border  max-w-fit px-2" id="closeBtn">Close</button>
+      </div>
+    </div>
 
     <!-- input for filter -->
     <div class="search-filter-container flex py-5">
-       <input id="search-filter" class="search-filter" type="text" placeholder="search to filter application by company....">
+      <input
+        id="search-filter"
+        class="search-filter"
+        type="text"
+        placeholder="search to filter application by company...."
+      />
     </div>
 
     <!-- for job applications -->
     <div id="applications-container" class="jobApp-container"></div>
- 
-
-
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

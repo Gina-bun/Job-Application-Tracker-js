@@ -1,4 +1,6 @@
-const newApplicationBtn = document.getElementById("newApp")
+const openModalBtn = document.getElementById("newApp")
+const modal = document.getElementById("jobModal")
+const closeModalBtn = document.getElementById("closeBtn")
 const form = document.getElementById("application-form");
 const companyName = document.getElementById("company-name");
 const jobTitle = document.getElementById("job-title");
@@ -7,6 +9,24 @@ const status = document.getElementById("status-select");
 const notes = document.getElementById("application-notes");
 const applicationsContainer = document.getElementById("applications-container");
 const searchFilter = document.getElementById("search-filter");
+
+//open the modal/pop-up
+openModalBtn.addEventListener("click", ()=> {
+  // console.log("display modal")
+  modal.style.display = "block"
+})
+
+//close the modal/pop-up
+closeModalBtn.addEventListener("click", ()=>{
+  modal.style.display = "none"
+})
+
+//close if clicking outside the modal content
+window.addEventListener("click", (e) => {
+     if(e.target === modal) {
+      modal.style.display = "none"
+     }
+})
 
 //Debounce function
 function debounce(func, delay) {
@@ -197,6 +217,9 @@ form.addEventListener("submit", (e) => {
 
   form.reset();
 
+  //close modal after submission
+  modal.style.display = "none"
+
   console.log(newCompanyName);
   console.log("submitted!!!");
 });
@@ -289,6 +312,8 @@ applicationsContainer.addEventListener("click", (e) => {
   editBtn.textContent = "edit";
 
   clickedSaveButton.replaceWith(editBtn);
+
+  
 });
 
 //delete feature**************************
