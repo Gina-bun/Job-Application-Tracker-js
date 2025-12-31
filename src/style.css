@@ -10,6 +10,7 @@ body{
     display: grid;
 }
 
+
 form{
     border: 1px solid #000;
     padding: 1em;
@@ -34,6 +35,11 @@ textarea{
     border: 1px solid #000;
 }
 
+.search-filter{
+    margin: auto;
+    max-width: 500px;
+}
+
 .jobApp-container{
     margin: 1em;
     display: flex;
@@ -48,11 +54,15 @@ textarea{
     padding: 1em .5em ;
 }
 
-.editBtn, .deleteBtn, .saveBtn{
+.newApp, .editBtn, .saveBtn, .deleteBtn{
     border: 1px solid #000;
     padding: .2em;
     width: 55px;
     border-radius: 8px;
+}
+
+.newApp{
+    width: fit-content;
 }
 
 .editBtn{

@@ -7,6 +7,9 @@
     <title>Job Application Tracker</title>
 </head>
 <body>
+   <header>
+    <button id="newApp" class="newApp">New Job Application <span>+</span></button>
+   </header>
     <form action="" id="application-form" class="flex flex-col gap-2">
         <label for="">
             Company name*:
@@ -57,6 +60,12 @@
           <button type="submit" id="submit-btn" class="border max-w-25">Save</button>
     </form>
 
+    <!-- input for filter -->
+    <div class="search-filter-container flex py-5">
+       <input id="search-filter" class="search-filter" type="text" placeholder="search to filter application by company....">
+    </div>
+
+    <!-- for job applications -->
     <div id="applications-container" class="jobApp-container"></div>
  
 

@@ -1,3 +1,4 @@
+const newApplicationBtn = document.getElementById("newApp")
 const form = document.getElementById("application-form");
 const companyName = document.getElementById("company-name");
 const jobTitle = document.getElementById("job-title");
@@ -5,59 +6,139 @@ const date = document.getElementById("application-date");
 const status = document.getElementById("status-select");
 const notes = document.getElementById("application-notes");
 const applicationsContainer = document.getElementById("applications-container");
+const searchFilter = document.getElementById("search-filter");
+
+//Debounce function
+function debounce(func, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
 
 // const jobApplications = [];
 
-//on page load, the saved job applications are loaded
+//on page load, the saved job applications are loaded************
 const jobApplications =
   JSON.parse(localStorage.getItem("jobApplications")) || [];
 
-//creating container for saved job applications
-jobApplications.forEach((job) => {
-  const savedJob = document.createElement("div");
-  savedJob.classList.add("savedJobItem");
-  savedJob.id = job.id;
+//SEARCH FILTER FEATURE(filter by company name)*************
+function handleSearchFilter(e) {
+  console.log("input changed!!!!");
 
-  //saved job item properties
-  const theCompanyName = document.createElement("p");
-  theCompanyName.textContent = job.companyName;
+  let searchInput = e.target.value;
+  if (!searchInput) {
+    renderSavedApplications();
+    return;
+  }
 
-  const jobName = document.createElement("p");
-  jobName.textContent = job.jobTitle;
+  //find matching applications(THE FILTERING part)
+  const matchingJobs = jobApplications.filter((job) =>
+    job.companyName.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
-  const theDateApplied = document.createElement("p");
-  theDateApplied.textContent = job.date;
+  applicationsContainer.innerHTML = ""; //empty the job application containser
 
-  let appStatus = document.createElement("p");
-  appStatus.textContent = job.status;
+  matchingJobs.forEach((job) => {
+    const jobItem = document.createElement("div");
+    jobItem.classList.add("jobItem");
+    jobItem.id = job.id;
 
-  //Delete and edit buttons
-  const theEditBtn = document.createElement("button");
-  theEditBtn.classList.add("editBtn");
-  theEditBtn.textContent = "Edit";
+    //create elements for company name, job title, application date, status
+    const jobCompany = document.createElement("p");
+    jobCompany.textContent = job.companyName;
 
-  const theDeleteBtn = document.createElement("button");
-  theDeleteBtn.classList.add("deleteBtn");
-  theDeleteBtn.textContent = "Delete";
+    const role = document.createElement("p");
+    role.textContent = job.jobTitle;
 
-  //appending properties to saved job item
-  savedJob.appendChild(theCompanyName);
-  savedJob.appendChild(jobName);
-  savedJob.appendChild(theDateApplied);
-  savedJob.appendChild(appStatus);
+    const dateApplied = document.createElement("p");
+    dateApplied.textContent = job.date;
 
-  //appending edit and delete button
-  savedJob.appendChild(theEditBtn);
-  savedJob.appendChild(theDeleteBtn);
+    const applicationStatus = document.createElement("p");
+    applicationStatus.textContent = job.status;
 
-  //appending job item to container
-  applicationsContainer.appendChild(savedJob);
-});
+    //Delete and edit buttons
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("editBtn");
+    editBtn.textContent = "Edit";
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("deleteBtn");
+    deleteBtn.textContent = "Delete";
+
+    //adding job application properties to job application item
+    jobItem.appendChild(jobCompany);
+    jobItem.appendChild(role);
+    jobItem.appendChild(dateApplied);
+    jobItem.appendChild(applicationStatus);
+    jobItem.appendChild(editBtn);
+    jobItem.appendChild(deleteBtn);
+
+    applicationsContainer.appendChild(jobItem);
+  });
+}
+
+//debounce filtered searching
+const debouncedSearch = debounce(handleSearchFilter, 400);
+searchFilter.addEventListener("input", debouncedSearch);
+
+//CREATE CONTAINER FOR SAVED JOB APPLICATIONS(for persistence)****************
+function renderSavedApplications() {
+  jobApplications.forEach((job) => {
+    const savedJob = document.createElement("div");
+    savedJob.classList.add("savedJobItem");
+    savedJob.id = job.id;
+
+    //saved job item properties
+    const theCompanyName = document.createElement("p");
+    theCompanyName.textContent =
+      job.companyName.charAt(0).toUpperCase() + job.companyName.slice(1);
+
+    const jobName = document.createElement("p");
+    jobName.textContent = job.jobTitle;
+
+    const theDateApplied = document.createElement("p");
+    theDateApplied.textContent = job.date;
+
+    let appStatus = document.createElement("p");
+    appStatus.textContent = job.status;
+
+    //Delete and edit buttons
+    const theEditBtn = document.createElement("button");
+    theEditBtn.classList.add("editBtn");
+    theEditBtn.textContent = "Edit";
+
+    const theDeleteBtn = document.createElement("button");
+    theDeleteBtn.classList.add("deleteBtn");
+    theDeleteBtn.textContent = "Delete";
+
+    //appending properties to saved job item
+    savedJob.appendChild(theCompanyName);
+    savedJob.appendChild(jobName);
+    savedJob.appendChild(theDateApplied);
+    savedJob.appendChild(appStatus);
+
+    //appending edit and delete button
+    savedJob.appendChild(theEditBtn);
+    savedJob.appendChild(theDeleteBtn);
+
+    //appending job item to container
+    applicationsContainer.appendChild(savedJob);
+  });
+}
+
+renderSavedApplications();
+
+//CREATING A NEW JOB APPLICATION*****************************
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const newCompanyName = companyName.value;
+  const newCompanyName =
+    companyName.value.charAt(0).toUpperCase() + companyName.value.slice(1);
   const newJobTitle = jobTitle.value;
   const newDate = date.value;
   const newStatus = status.value;
@@ -120,7 +201,7 @@ form.addEventListener("submit", (e) => {
   console.log("submitted!!!");
 });
 
-//edit feature
+//edit feature*******************************
 //grabbing edit button
 applicationsContainer.addEventListener("click", (e) => {
   //check if edit button is clicked
@@ -172,7 +253,7 @@ applicationsContainer.addEventListener("click", (e) => {
   oldStatusElement.replaceWith(select);
 });
 
-//save feature
+//save feature****************************
 applicationsContainer.addEventListener("click", (e) => {
   if (!e.target.classList.contains("saveBtn")) return;
 
@@ -210,29 +291,29 @@ applicationsContainer.addEventListener("click", (e) => {
   clickedSaveButton.replaceWith(editBtn);
 });
 
-//delete feature
+//delete feature**************************
 applicationsContainer.addEventListener("click", (e) => {
-  if(!e.target.classList.contains("deleteBtn")) return
+  if (!e.target.classList.contains("deleteBtn")) return;
 
   //get job item
-  const jobItem = e.target.closest(".jobItem, .savedJobItem")
+  const jobItem = e.target.closest(".jobItem, .savedJobItem");
 
   //get job id
-  const jobId = jobItem.id
+  const jobId = jobItem.id;
 
   //find matching job object
-  const job = jobApplications.find((job) => job.id === jobId)
+  const job = jobApplications.find((job) => job.id === jobId);
 
   //remove job obj from job application array
-  const index = jobApplications.indexOf(job)
+  const index = jobApplications.indexOf(job);
 
-  if (index !== -1){
-    jobApplications.splice(index, 1)
+  if (index !== -1) {
+    jobApplications.splice(index, 1);
   }
 
   //update in localStorage
-  localStorage.setItem("jobApplications", JSON.stringify(jobApplications))
+  localStorage.setItem("jobApplications", JSON.stringify(jobApplications));
 
   //update UI to show deletion
-  jobItem.remove()
-})
+  jobItem.remove();
+});
