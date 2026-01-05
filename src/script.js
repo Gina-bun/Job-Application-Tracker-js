@@ -155,7 +155,8 @@ function renderSavedApplications() {
     jobDetails.classList.add("job-details");
 
     const jobName = document.createElement("p"); //name of role applied for
-    jobName.textContent = job.jobTitle;
+    jobName.textContent = 
+                    job.jobTitle.charAt(0).toUpperCase() + job.jobTitle.slice(1);
 
     const theDateApplied = document.createElement("p");
     theDateApplied.textContent = job.date;
@@ -209,9 +210,11 @@ form.addEventListener("submit", (e) => {
 
   const newCompanyName =
     companyName.value.charAt(0).toUpperCase() + companyName.value.slice(1);
-  const newJobTitle = jobTitle.value;
+  const newJobTitle = 
+      jobTitle.value.charAt(0).toUpperCase() + jobTitle.value.slice(1);
   const newDate = date.value;
-  const newStatus = status.value;
+  const newStatus = 
+          status.value.charAt(0).toUpperCase() + status.value.slice(1);
 
   const newJobApplication = {
     id: crypto.randomUUID(),
