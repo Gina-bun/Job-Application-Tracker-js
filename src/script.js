@@ -49,11 +49,12 @@ function debounce(func, delay) {
 const jobApplications =
   JSON.parse(localStorage.getItem("jobApplications")) || [];
 
-      numberOfJobs.textContent = `${jobApplications.length} total applications`
+      //numberOfJobs.textContent = `${jobApplications.length} total applications`
   console.log(jobApplications.length)
 
 //SEARCH FILTER FEATURE(filter by company name)*************
 function handleSearchFilter(e) {
+  applicationsContainer.innerHTML = ""
   console.log("input changed!!!!");
 
   let searchInput = e.target.value;
@@ -70,6 +71,7 @@ function handleSearchFilter(e) {
   );
 
   if (matchingJobs.length === 0) {
+    numberOfJobs.innerHTML = ""
     applicationsContainer.innerHTML =
       "<p>No matching job applications found</p>";
     return;
@@ -114,6 +116,11 @@ function handleSearchFilter(e) {
     jobItem.appendChild(deleteBtn);
 
     applicationsContainer.appendChild(jobItem);
+
+         (function (){
+      numberOfJobs.textContent = `${matchingJobs.length} matching applications`
+  console.log(jobApplications.length)
+  })()
   });
 }
 
@@ -185,6 +192,12 @@ function renderSavedApplications() {
 
     //appending job item to container
     applicationsContainer.appendChild(savedJob);
+
+       (function (){
+      numberOfJobs.textContent = `${jobApplications.length} total applications`
+  console.log(jobApplications.length)
+  })()
+
   });
 }
 
