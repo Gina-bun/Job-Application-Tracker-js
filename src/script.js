@@ -49,7 +49,7 @@ function debounce(func, delay) {
 const jobApplications =
   JSON.parse(localStorage.getItem("jobApplications")) || [];
 
-  numberOfJobs.textContent = `${jobApplications.length} total applications`
+      numberOfJobs.textContent = `${jobApplications.length} total applications`
   console.log(jobApplications.length)
 
 //SEARCH FILTER FEATURE(filter by company name)*************
@@ -59,6 +59,7 @@ function handleSearchFilter(e) {
   let searchInput = e.target.value;
   //render full job application list if search bar is empty
   if (!searchInput) {
+    applicationsContainer.innerHTML = ""
     renderSavedApplications();
     return;
   }
@@ -86,6 +87,7 @@ function handleSearchFilter(e) {
     jobCompany.textContent = job.companyName;
 
     const role = document.createElement("p");
+    role.classList.add("role")
     role.textContent = job.jobTitle;
 
     const dateApplied = document.createElement("p");
@@ -155,6 +157,7 @@ function renderSavedApplications() {
     jobDetails.appendChild(theDateApplied);
 
     let appStatus = document.createElement("p");
+    appStatus.classList.add("status")
     appStatus.textContent = job.status;
 
     //Delete and edit buttons
@@ -243,6 +246,7 @@ form.addEventListener("submit", (e) => {
   jobDetails.appendChild(dateApplied)
 
   const applicationStatus = document.createElement("p");
+  applicationStatus.classList.add("status")
   applicationStatus.textContent = newJobApplication.status;
 
   //Delete and edit buttons
@@ -270,6 +274,11 @@ form.addEventListener("submit", (e) => {
 
   applicationsContainer.appendChild(jobItem);
 
+  (function (){
+      numberOfJobs.textContent = `${jobApplications.length} total applications`
+  console.log(jobApplications.length)
+  })()
+
   form.reset();
 
   //close modal after submission
@@ -283,7 +292,7 @@ form.addEventListener("submit", (e) => {
 //grabbing edit button
 applicationsContainer.addEventListener("click", (e) => {
   //check if edit button is clicked
-  if (!e.target.classList.contains("editBtn")) return;
+  if (!e.target.closest(".editBtn")) return;
 
   //find the job container
   const jobItem = e.target.closest(".jobItem, .savedJobItem");
@@ -291,7 +300,8 @@ applicationsContainer.addEventListener("click", (e) => {
   //edit button becomes save button
   const clickedEditButton = jobItem.querySelector("button:nth-of-type(1)");
   const saveBtn = document.createElement("button"); //new save button
-  saveBtn.textContent = "save";
+  saveBtn.innerHTML = `<i data-lucide="save"></i>`
+  lucide.createIcons();
   saveBtn.classList.add("saveBtn");
 
   clickedEditButton.replaceWith(saveBtn);
@@ -325,15 +335,17 @@ applicationsContainer.addEventListener("click", (e) => {
   select.appendChild(offerOption);
 
   //grabbing job item status
-  const oldStatusElement = jobItem.querySelector("p:nth-of-type(4)");
+  const oldStatusElement = jobItem.querySelector(".status");
   // console.log(oldStatusElement)
 
-  oldStatusElement.replaceWith(select);
+  // oldStatusElement.replaceWith(select);
+  oldStatusElement.innerHTML = ""
+  oldStatusElement.appendChild(select)
 });
 
 //save feature****************************
 applicationsContainer.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("saveBtn")) return;
+  if (!e.target.closest(".saveBtn")) return;
 
   //find the job item
   const jobItem = e.target.closest(".jobItem, .savedJobItem");
@@ -364,14 +376,15 @@ applicationsContainer.addEventListener("click", (e) => {
   const editBtn = document.createElement("button");
   editBtn.classList.add("editBtn");
   //new edit button
-  editBtn.textContent = "edit";
+  editBtn.innerHTML = `<i data-lucide="pencil"></i>`
+  lucide.createIcons();
 
   clickedSaveButton.replaceWith(editBtn);
 });
 
 //delete feature**************************
 applicationsContainer.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("deleteBtn")) return;
+  if (!e.target.closest(".deleteBtn")) return;
 
   //get job item
   const jobItem = e.target.closest(".jobItem, .savedJobItem");
@@ -391,6 +404,11 @@ applicationsContainer.addEventListener("click", (e) => {
 
   //update in localStorage
   localStorage.setItem("jobApplications", JSON.stringify(jobApplications));
+
+    (function (){
+      numberOfJobs.textContent = `${jobApplications.length} total applications`
+  console.log(jobApplications.length)
+  })()
 
   //update UI to show deletion
   jobItem.remove();

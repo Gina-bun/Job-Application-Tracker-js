@@ -205,20 +205,11 @@
   .flex {
     display: flex;
   }
-  .table {
-    display: table;
-  }
   .w-full {
     width: 100%;
   }
   .max-w-fit {
     max-width: fit-content;
-  }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .resize {
-    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -269,19 +260,11 @@
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
-  .from-pink-400 {
-    --tw-gradient-from: var(--color-pink-400);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
   .from-pink-400\/40 {
     --tw-gradient-from: color-mix(in srgb, oklch(71.8% 0.202 349.761) 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       --tw-gradient-from: color-mix(in oklab, var(--color-pink-400) 40%, transparent);
     }
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .to-orange-400 {
-    --tw-gradient-to: var(--color-orange-400);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-orange-400\/50 {
@@ -303,17 +286,8 @@
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
   }
-  .pl-3 {
-    padding-left: calc(var(--spacing) * 3);
-  }
   .pl-\[1em\] {
     padding-left: 1em;
-  }
-  .pl-\[2em\] {
-    padding-left: 2em;
-  }
-  .pl-\[3em\] {
-    padding-left: 3em;
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -332,13 +306,6 @@
   }
   .text-gray-800 {
     color: var(--color-gray-800);
-  }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -524,11 +491,6 @@ textarea {
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -596,7 +558,6 @@ textarea {
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
