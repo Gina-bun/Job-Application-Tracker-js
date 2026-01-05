@@ -8,9 +8,18 @@
   </head>
   <body>
     <!-- header -->
-    <header>
-      <button id="newApp" class="newApp">
-        New Job Application <span>+</span>
+    <header class=" w-full flex justify-between bg-amber-50 px-3 py-8 border-b border-gray-500">
+      <div class=" flex gap-2 items-center">
+        <div class="logo-icon bg-linear-155 from-pink-400/40 to-orange-400/50 p-2 max-w-fit rounded-xl">
+          <i data-lucide="sparkles" class="text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-gray-800">Job Tracker</h2>
+        </div>
+      </div>
+      <button id="newApp" class="newApp flex items-center bg-linear-155 from-pink-400/40 to-orange-400/50">
+        <i data-lucide="plus"></i>
+        New Job Application
       </button>
     </header>
 
@@ -66,12 +75,13 @@
             </textarea>
           </label>
 
-            <button type="submit" id="submit-btn" class="border max-w-fit px-2">
-              Save
-            </button>
-
+          <button type="submit" id="submit-btn" class="border max-w-fit px-2">
+            Save
+          </button>
         </form>
-        <button class="closeBtn border  max-w-fit px-2" id="closeBtn">Close</button>
+        <button class="closeBtn border max-w-fit px-2" id="closeBtn">
+          Close
+        </button>
       </div>
     </div>
 
@@ -85,9 +95,17 @@
       />
     </div>
 
+
     <!-- for job applications -->
     <div id="applications-container" class="jobApp-container"></div>
 
+      <!-- link to js-code -->
     <script src="./src/script.js"></script>
+
+    <!-- lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>
