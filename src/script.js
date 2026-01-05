@@ -31,7 +31,16 @@ window.addEventListener("click", (e) => {
   }
 });
 
-//Debounce function
+//convert date into UI-friendly format
+function formatDateReadable(dateStr) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  })
+}
+
+//Debounce function**************************
 function debounce(func, delay) {
   let timeoutId;
 
@@ -159,7 +168,9 @@ function renderSavedApplications() {
                     job.jobTitle.charAt(0).toUpperCase() + job.jobTitle.slice(1);
 
     const theDateApplied = document.createElement("p");
-    theDateApplied.textContent = job.date;
+      theDateApplied.textContent = formatDateReadable(job.date);
+
+   
 
     jobDetails.appendChild(jobName);
     jobDetails.appendChild(theDateApplied);
@@ -256,7 +267,7 @@ form.addEventListener("submit", (e) => {
   role.textContent = newJobApplication.jobTitle;
 
   const dateApplied = document.createElement("p");
-  dateApplied.textContent = newJobApplication.date;
+  dateApplied.textContent = formatDateReadable(newJobApplication.date);
 
   jobDetails.appendChild(role)
   jobDetails.appendChild(dateApplied)
