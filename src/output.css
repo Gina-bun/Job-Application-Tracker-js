@@ -172,9 +172,6 @@
   }
 }
 @layer utilities {
-  .fixed {
-    position: fixed;
-  }
   .sticky {
     position: sticky;
   }
@@ -214,20 +211,11 @@
   .flex {
     display: flex;
   }
-  .table {
-    display: table;
-  }
   .w-full {
     width: 100%;
   }
   .max-w-fit {
     max-width: fit-content;
-  }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .resize {
-    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -278,19 +266,11 @@
     }
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
-  .from-pink-400 {
-    --tw-gradient-from: var(--color-pink-400);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
   .from-pink-400\/40 {
     --tw-gradient-from: color-mix(in srgb, oklch(71.8% 0.202 349.761) 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       --tw-gradient-from: color-mix(in oklab, var(--color-pink-400) 40%, transparent);
     }
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .to-orange-400 {
-    --tw-gradient-to: var(--color-orange-400);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-orange-400\/50 {
@@ -299,9 +279,6 @@
       --tw-gradient-to: color-mix(in oklab, var(--color-orange-400) 50%, transparent);
     }
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .bg-fixed {
-    background-attachment: fixed;
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
@@ -335,13 +312,6 @@
   }
   .text-gray-800 {
     color: var(--color-gray-800);
-  }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -428,7 +398,7 @@ textarea {
 .jobItem, .savedJobItem {
   box-shadow: 1px 1px 10px rgb(218, 217, 217);
   display: flex;
-  gap: 3px;
+  gap: 1em;
   flex-direction: column;
   justify-content: space-between;
   padding: 1em .5em;
@@ -449,6 +419,10 @@ textarea {
 .job-application-btns {
   display: flex;
   gap: .8em;
+}
+.role-container, .date-container {
+  display: flex;
+  gap: .4em;
 }
 .newApp, .editBtn, .saveBtn, .deleteBtn {
   display: flex;
@@ -528,11 +502,6 @@ textarea {
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -600,7 +569,6 @@ textarea {
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;

@@ -99,12 +99,13 @@ textarea{
     display: flex;
     flex-direction: column;
     gap: 1em;
+    
 }
 
 .jobItem, .savedJobItem{
     box-shadow: 1px 1px 10px rgb(218, 217, 217);
     display: flex;
-    gap: 3px;
+    gap: 1em;
     flex-direction: column;
     justify-content: space-between;
     padding: 1em .5em ;
@@ -129,6 +130,11 @@ textarea{
 .job-application-btns{
     display: flex;
     gap: .8em;
+}
+
+.role-container, .date-container{
+    display: flex;
+    gap: .4em;
 }
 
 .newApp, .editBtn, .saveBtn, .deleteBtn{

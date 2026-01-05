@@ -170,10 +170,26 @@ function renderSavedApplications() {
     const theDateApplied = document.createElement("p");
       theDateApplied.textContent = formatDateReadable(job.date);
 
-   
+    //container to hold icon and job role
+    const roleContainer = document.createElement("div")
+    roleContainer.classList.add("role-container")
+    const roleIcon = document.createElement("div")//to hold the icon
+    roleIcon.innerHTML = `<i data-lucide="briefcase"></i>`
 
-    jobDetails.appendChild(jobName);
-    jobDetails.appendChild(theDateApplied);
+    roleContainer.appendChild(roleIcon)//adding icon to container
+    roleContainer.appendChild(jobName)
+
+     //container to hold icon and date
+     const dateContainer = document.createElement("div")
+     dateContainer.classList.add("date-container")
+     const dateIcon = document.createElement("div")
+     dateIcon.innerHTML = `<i data-lucide="calendar"></i>`
+
+     dateContainer.appendChild(dateIcon)
+     dateContainer.appendChild(theDateApplied)
+
+    jobDetails.appendChild(roleContainer);
+    jobDetails.appendChild(dateContainer);
 
     let appStatus = document.createElement("p");
     appStatus.classList.add("status")
@@ -210,6 +226,7 @@ function renderSavedApplications() {
   console.log(jobApplications.length)
   })()
 
+  lucide.createIcons()
   });
 }
 
@@ -269,8 +286,29 @@ form.addEventListener("submit", (e) => {
   const dateApplied = document.createElement("p");
   dateApplied.textContent = formatDateReadable(newJobApplication.date);
 
-  jobDetails.appendChild(role)
-  jobDetails.appendChild(dateApplied)
+   //container to hold icon and job role
+    const roleContainer = document.createElement("div")
+    roleContainer.classList.add("role-container")
+    const roleIcon = document.createElement("div")//to hold the icon
+    roleIcon.innerHTML = `<i data-lucide="briefcase"></i>`
+
+    roleContainer.appendChild(roleIcon)//adding icon to container
+    roleContainer.appendChild(role)
+
+     //container to hold icon and date
+     const dateContainer = document.createElement("div")
+     dateContainer.classList.add("date-container")
+     const dateIcon = document.createElement("div")
+     dateIcon.innerHTML = `<i data-lucide="calendar"></i>`
+
+     dateContainer.appendChild(dateIcon)
+     dateContainer.appendChild(dateApplied)
+
+    jobDetails.appendChild(roleContainer);
+    jobDetails.appendChild(dateContainer);
+
+  jobDetails.appendChild(roleContainer)
+  jobDetails.appendChild(dateContainer)
 
   const applicationStatus = document.createElement("p");
   applicationStatus.classList.add("status")
