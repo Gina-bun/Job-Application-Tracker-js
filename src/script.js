@@ -1,32 +1,35 @@
-const openModalBtn = document.getElementById("newApp")
-const modal = document.getElementById("jobModal")
-const closeModalBtn = document.getElementById("closeBtn")
+const openModalBtn = document.getElementById("newApp");
+const modal = document.getElementById("jobModal");
+const closeModalBtn = document.getElementById("closeBtn");
 const form = document.getElementById("application-form");
 const companyName = document.getElementById("company-name");
 const jobTitle = document.getElementById("job-title");
 const date = document.getElementById("application-date");
 const status = document.getElementById("status-select");
-const notes = document.getElementById("application-notes");
 const applicationsContainer = document.getElementById("applications-container");
 const searchFilter = document.getElementById("search-filter");
+const numberOfJobs = document.getElementById("number-of-jobs")
+
+
+
 
 //open the modal/pop-up
-openModalBtn.addEventListener("click", ()=> {
+openModalBtn.addEventListener("click", () => {
   // console.log("display modal")
-  modal.style.display = "block"
-})
+  modal.style.display = "block";
+});
 
 //close the modal/pop-up
-closeModalBtn.addEventListener("click", ()=>{
-  modal.style.display = "none"
-})
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
 
 //close if clicking outside the modal content
 window.addEventListener("click", (e) => {
-     if(e.target === modal) {
-      modal.style.display = "none"
-     }
-})
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
 
 //Debounce function
 function debounce(func, delay) {
@@ -46,6 +49,9 @@ function debounce(func, delay) {
 const jobApplications =
   JSON.parse(localStorage.getItem("jobApplications")) || [];
 
+  numberOfJobs.textContent = `${jobApplications.length} total applications`
+  console.log(jobApplications.length)
+
 //SEARCH FILTER FEATURE(filter by company name)*************
 function handleSearchFilter(e) {
   console.log("input changed!!!!");
@@ -62,10 +68,11 @@ function handleSearchFilter(e) {
     job.companyName.toLowerCase().includes(searchInput.toLowerCase())
   );
 
-   if(matchingJobs.length === 0) {
-      applicationsContainer.innerHTML = "<p>No matching job applications found</p>"
-      return
-  } 
+  if (matchingJobs.length === 0) {
+    applicationsContainer.innerHTML =
+      "<p>No matching job applications found</p>";
+    return;
+  }
 
   applicationsContainer.innerHTML = ""; //empty the job application containser
 
@@ -120,37 +127,58 @@ function renderSavedApplications() {
     savedJob.id = job.id;
 
     //saved job item properties
+    const companyNameContainer = document.createElement("div");
+    companyNameContainer.classList.add("company-name-container");
+
+    const companyIcon = document.createElement("div");
+    companyIcon.innerHTML = `<i data-lucide="building-2" class="company-icon"></i>`;
+    lucide.createIcons();
+
     const theCompanyName = document.createElement("p");
     theCompanyName.textContent =
       job.companyName.charAt(0).toUpperCase() + job.companyName.slice(1);
 
-    const jobName = document.createElement("p");
+    companyNameContainer.appendChild(companyIcon);
+    companyNameContainer.appendChild(theCompanyName);
+
+    //container for flex display of role and date
+    const jobDetails = document.createElement("div");
+    jobDetails.classList.add("job-details");
+
+    const jobName = document.createElement("p"); //name of role applied for
     jobName.textContent = job.jobTitle;
 
     const theDateApplied = document.createElement("p");
     theDateApplied.textContent = job.date;
 
+    jobDetails.appendChild(jobName);
+    jobDetails.appendChild(theDateApplied);
+
     let appStatus = document.createElement("p");
     appStatus.textContent = job.status;
 
     //Delete and edit buttons
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("job-application-btns");
+
     const theEditBtn = document.createElement("button");
     theEditBtn.classList.add("editBtn");
-    theEditBtn.textContent = "Edit";
+    theEditBtn.innerHTML = `<i data-lucide="pencil"></>`
 
     const theDeleteBtn = document.createElement("button");
     theDeleteBtn.classList.add("deleteBtn");
-    theDeleteBtn.textContent = "Delete";
+    theDeleteBtn.innerHTML = `<i data-lucide="trash-2"></>`
 
     //appending properties to saved job item
-    savedJob.appendChild(theCompanyName);
-    savedJob.appendChild(jobName);
-    savedJob.appendChild(theDateApplied);
+    savedJob.appendChild(companyNameContainer);
+    savedJob.appendChild(jobDetails);
     savedJob.appendChild(appStatus);
 
     //appending edit and delete button
-    savedJob.appendChild(theEditBtn);
-    savedJob.appendChild(theDeleteBtn);
+    buttonContainer.appendChild(theEditBtn);
+    buttonContainer.appendChild(theDeleteBtn);
+
+    savedJob.appendChild(buttonContainer);
 
     //appending job item to container
     applicationsContainer.appendChild(savedJob);
@@ -168,7 +196,6 @@ form.addEventListener("submit", (e) => {
   const newJobTitle = jobTitle.value;
   const newDate = date.value;
   const newStatus = status.value;
-  const newNotes = notes.value;
 
   const newJobApplication = {
     id: crypto.randomUUID(),
@@ -176,7 +203,6 @@ form.addEventListener("submit", (e) => {
     jobTitle: newJobTitle,
     date: newDate,
     status: newStatus,
-    notes: newNotes,
   };
 
   jobApplications.push(newJobApplication);
@@ -190,8 +216,22 @@ form.addEventListener("submit", (e) => {
   jobItem.id = newJobApplication.id;
 
   //job application properties (individual)
+  const companyNameContainer = document.createElement("div");
+  companyNameContainer.classList.add("company-name-container");
+
+  const companyIcon = document.createElement("div");
+  companyIcon.innerHTML = `<i data-lucide="building-2" class="company-icon"></i>`;
+  lucide.createIcons();
+
   const jobCompany = document.createElement("p");
   jobCompany.textContent = newJobApplication.companyName;
+
+  companyNameContainer.appendChild(companyIcon);
+  companyNameContainer.appendChild(jobCompany);
+
+  //container for flex display of role and date
+  const jobDetails = document.createElement("div");
+  jobDetails.classList.add("job-details");
 
   const role = document.createElement("p");
   role.textContent = newJobApplication.jobTitle;
@@ -199,32 +239,41 @@ form.addEventListener("submit", (e) => {
   const dateApplied = document.createElement("p");
   dateApplied.textContent = newJobApplication.date;
 
+  jobDetails.appendChild(role)
+  jobDetails.appendChild(dateApplied)
+
   const applicationStatus = document.createElement("p");
   applicationStatus.textContent = newJobApplication.status;
 
   //Delete and edit buttons
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("job-application-btns");
+
   const editBtn = document.createElement("button");
   editBtn.classList.add("editBtn");
-  editBtn.textContent = "Edit";
+  editBtn.innerHTML = `<i data-lucide="pencil"></>`
+   lucide.createIcons();
 
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("deleteBtn");
-  deleteBtn.textContent = "Delete";
+  deleteBtn.innerHTML = `<i data-lucide="trash-2"></>`
+   lucide.createIcons();
+
+  buttonContainer.appendChild(editBtn)
+  buttonContainer.appendChild(deleteBtn)
 
   //adding job application properties to job application item
-  jobItem.appendChild(jobCompany);
-  jobItem.appendChild(role);
-  jobItem.appendChild(dateApplied);
+  jobItem.appendChild(companyNameContainer);
+  jobItem.appendChild(jobDetails);
   jobItem.appendChild(applicationStatus);
-  jobItem.appendChild(editBtn);
-  jobItem.appendChild(deleteBtn);
+  jobItem.appendChild(buttonContainer);
 
   applicationsContainer.appendChild(jobItem);
 
   form.reset();
 
   //close modal after submission
-  modal.style.display = "none"
+  modal.style.display = "none";
 
   console.log(newCompanyName);
   console.log("submitted!!!");
@@ -318,8 +367,6 @@ applicationsContainer.addEventListener("click", (e) => {
   editBtn.textContent = "edit";
 
   clickedSaveButton.replaceWith(editBtn);
-
-  
 });
 
 //delete feature**************************
