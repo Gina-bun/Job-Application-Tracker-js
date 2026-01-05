@@ -63,7 +63,7 @@ const jobApplications =
 
 //SEARCH FILTER FEATURE(filter by company name)*************
 function handleSearchFilter(e) {
-  applicationsContainer.innerHTML = ""
+  applicationsContainer.innerHTML = ""//empty the job application container
   console.log("input changed!!!!");
 
   let searchInput = e.target.value;
@@ -86,50 +86,136 @@ function handleSearchFilter(e) {
     return;
   }
 
-  applicationsContainer.innerHTML = ""; //empty the job application containser
-
   matchingJobs.forEach((job) => {
-    const jobItem = document.createElement("div");
-    jobItem.classList.add("jobItem");
-    jobItem.id = job.id;
+     const savedJob = document.createElement("div");
+    savedJob.classList.add("savedJobItem");
+    savedJob.id = job.id;
 
-    //create elements for company name, job title, application date, status
-    const jobCompany = document.createElement("p");
-    jobCompany.textContent = job.companyName;
+    //saved job item properties
+    const companyNameContainer = document.createElement("div");
+    companyNameContainer.classList.add("company-name-container");
 
-    const role = document.createElement("p");
-    role.classList.add("role")
-    role.textContent = job.jobTitle;
+    const companyIcon = document.createElement("div");
+    companyIcon.innerHTML = `<i data-lucide="building-2" class="company-icon"></i>`;
+    lucide.createIcons();
 
-    const dateApplied = document.createElement("p");
-    dateApplied.textContent = job.date;
+    const theCompanyName = document.createElement("p");
+    theCompanyName.textContent =
+      job.companyName.charAt(0).toUpperCase() + job.companyName.slice(1);
 
-    const applicationStatus = document.createElement("p");
-    applicationStatus.textContent = job.status;
+    companyNameContainer.appendChild(companyIcon);
+    companyNameContainer.appendChild(theCompanyName);
+
+    //container for flex display of role and date
+    const jobDetails = document.createElement("div");
+    jobDetails.classList.add("job-details");
+
+    const jobName = document.createElement("p"); //name of role applied for
+    jobName.textContent = 
+                    job.jobTitle.charAt(0).toUpperCase() + job.jobTitle.slice(1);
+
+    const theDateApplied = document.createElement("p");
+      theDateApplied.textContent = formatDateReadable(job.date);
+
+    //container to hold icon and job role
+    const roleContainer = document.createElement("div")
+    roleContainer.classList.add("role-container")
+    const roleIcon = document.createElement("div")//to hold the icon
+    roleIcon.innerHTML = `<i data-lucide="briefcase"></i>`
+
+    roleContainer.appendChild(roleIcon)//adding icon to container
+    roleContainer.appendChild(jobName)
+
+     //container to hold icon and date
+     const dateContainer = document.createElement("div")
+     dateContainer.classList.add("date-container")
+     const dateIcon = document.createElement("div")
+     dateIcon.innerHTML = `<i data-lucide="calendar"></i>`
+
+     dateContainer.appendChild(dateIcon)
+     dateContainer.appendChild(theDateApplied)
+
+    jobDetails.appendChild(roleContainer);
+    jobDetails.appendChild(dateContainer);
+
+    let appStatus = document.createElement("p");
+    appStatus.classList.add("status")
+    appStatus.textContent = job.status;
 
     //Delete and edit buttons
-    const editBtn = document.createElement("button");
-    editBtn.classList.add("editBtn");
-    editBtn.textContent = "Edit";
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("job-application-btns");
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("deleteBtn");
-    deleteBtn.textContent = "Delete";
+    const theEditBtn = document.createElement("button");
+    theEditBtn.classList.add("editBtn");
+    theEditBtn.innerHTML = `<i data-lucide="pencil"></>`
 
-    //adding job application properties to job application item
-    jobItem.appendChild(jobCompany);
-    jobItem.appendChild(role);
-    jobItem.appendChild(dateApplied);
-    jobItem.appendChild(applicationStatus);
-    jobItem.appendChild(editBtn);
-    jobItem.appendChild(deleteBtn);
+    const theDeleteBtn = document.createElement("button");
+    theDeleteBtn.classList.add("deleteBtn");
+    theDeleteBtn.innerHTML = `<i data-lucide="trash-2"></>`
 
-    applicationsContainer.appendChild(jobItem);
+    //appending properties to saved job item
+    savedJob.appendChild(companyNameContainer);
+    savedJob.appendChild(jobDetails);
+    savedJob.appendChild(appStatus);
 
-         (function (){
+    //appending edit and delete button
+    buttonContainer.appendChild(theEditBtn);
+    buttonContainer.appendChild(theDeleteBtn);
+
+    savedJob.appendChild(buttonContainer);
+
+    //appending job item to container
+    applicationsContainer.appendChild(savedJob);
+
+           (function (){
       numberOfJobs.textContent = `${matchingJobs.length} matching applications`
   console.log(jobApplications.length)
   })()
+  
+
+  lucide.createIcons()
+  //   const jobItem = document.createElement("div");
+  //   jobItem.classList.add("jobItem");
+  //   jobItem.id = job.id;
+
+  //   //create elements for company name, job title, application date, status
+  //   const jobCompany = document.createElement("p");
+  //   jobCompany.textContent = job.companyName;
+
+  //   const role = document.createElement("p");
+  //   role.classList.add("role")
+  //   role.textContent = job.jobTitle;
+
+  //   const dateApplied = document.createElement("p");
+  //   dateApplied.textContent = job.date;
+
+  //   const applicationStatus = document.createElement("p");
+  //   applicationStatus.textContent = job.status;
+
+  //   //Delete and edit buttons
+  //   const editBtn = document.createElement("button");
+  //   editBtn.classList.add("editBtn");
+  //   editBtn.textContent = "Edit";
+
+  //   const deleteBtn = document.createElement("button");
+  //   deleteBtn.classList.add("deleteBtn");
+  //   deleteBtn.textContent = "Delete";
+
+  //   //adding job application properties to job application item
+  //   jobItem.appendChild(jobCompany);
+  //   jobItem.appendChild(role);
+  //   jobItem.appendChild(dateApplied);
+  //   jobItem.appendChild(applicationStatus);
+  //   jobItem.appendChild(editBtn);
+  //   jobItem.appendChild(deleteBtn);
+
+  //   applicationsContainer.appendChild(jobItem);
+
+  //        (function (){
+  //     numberOfJobs.textContent = `${matchingJobs.length} matching applications`
+  // console.log(jobApplications.length)
+  // })()
   });
 }
 
