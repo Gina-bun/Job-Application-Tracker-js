@@ -313,6 +313,8 @@ form.addEventListener("submit", (e) => {
 
   console.log(newCompanyName);
   console.log("submitted!!!");
+
+   lucide.createIcons();
 });
 
 //edit feature*******************************
@@ -368,6 +370,7 @@ applicationsContainer.addEventListener("click", (e) => {
   // oldStatusElement.replaceWith(select);
   oldStatusElement.innerHTML = ""
   oldStatusElement.appendChild(select)
+  lucide.createIcons()
 });
 
 //save feature****************************
@@ -407,6 +410,7 @@ applicationsContainer.addEventListener("click", (e) => {
   lucide.createIcons();
 
   clickedSaveButton.replaceWith(editBtn);
+  lucide.createIcons();
 });
 
 //delete feature**************************

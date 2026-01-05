@@ -156,7 +156,8 @@ textarea{
 }
 
 .saveBtn{
-    background-color: rgb(24, 86, 31);
+    background: linear-gradient(155deg, rgba(244, 114, 182, 0.4), rgba(251, 146, 60, 0.5));
+    border: none;
 }
 
 .deleteBtn{
