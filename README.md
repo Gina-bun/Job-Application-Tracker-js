@@ -21,6 +21,7 @@ Job applications are stored in an array and persisted using localStorage. The UI
 
 ### Screenshots
 
+
 ### Future Improvements
 - Add filtering by status or date
 - Add notes feature

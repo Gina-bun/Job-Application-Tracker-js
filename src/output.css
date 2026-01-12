@@ -286,6 +286,9 @@
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
@@ -389,8 +392,11 @@ textarea {
   border: 1px solid #000;
 }
 .search-filter {
-  margin: auto;
-  max-width: 500px;
+  min-width: 95%;
+  box-shadow: none;
+}
+.search-filter-container {
+  box-shadow: 1px 1px 10px rgb(218, 217, 217);
 }
 .jobApp-container {
   margin: 1em;
