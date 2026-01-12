@@ -467,7 +467,7 @@ applicationsContainer.addEventListener("click", (e) => {
 
   const select = document.createElement("select");
   const selectOption = document.createElement("option");
-  selectOption.textContent = "Select";
+  selectOption.textContent = "Select status";
 
   const appliedOption = document.createElement("option");
   appliedOption.textContent = "Applied";
@@ -486,6 +486,8 @@ applicationsContainer.addEventListener("click", (e) => {
   select.appendChild(interviewOption);
   select.appendChild(rejectedOption);
   select.appendChild(offerOption);
+
+  select.value = job.status;
 
   //grabbing job item status
   const oldStatusElement = jobItem.querySelector(".status");
