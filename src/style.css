@@ -100,8 +100,8 @@ textarea {
 /* for each job application */
 .jobItem,
 .savedJobItem {
- position: relative;
- overflow: hidden;
+  position: relative;
+  overflow: hidden;
   box-shadow: 1px 1px 10px rgb(218, 217, 217);
   display: flex;
   gap: 1em;
@@ -190,6 +190,28 @@ textarea {
     right: 1.5em;
     top: 50%;
     transform: translateY(-50%);
+  }
+}
 
+@media (min-width: 1024px) {
+  header {
+    padding-left: 6em;
+    padding-right: 6em;
+    margin-bottom: 2em;
+  }
+
+  .search-filter-container {
+    min-width: 1000px;
+    margin: auto;
+  }
+
+  #number-of-jobs{
+    margin-left: 6em;
+  }
+
+  .jobItem,
+  .savedJobItem {
+    margin-left: 5em;
+    margin-right: 5em;
   }
 }
