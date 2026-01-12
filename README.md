@@ -20,7 +20,11 @@
 Job applications are stored in an array and persisted using localStorage. The UI is dynamically rendered using JavaScript DOM manipulation.
 
 ### Screenshots
-
+<p align="center">
+ <img src="screenshots/mobile-view.png" width="250" />
+ <img src="screenshots/mobile-view-modal.png" width="249" />
+ <img src="screenshots/tablet-view.png" width="400" />
+</p>
 
 ### Future Improvements
 - Add filtering by status or date
