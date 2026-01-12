@@ -516,6 +516,7 @@ applicationsContainer.addEventListener("click", (e) => {
   console.log(select);
 
   const newStatus = document.createElement("p");
+  newStatus.classList.add("status");
   newStatus.textContent = select.value;
 
   //job object update

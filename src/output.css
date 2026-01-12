@@ -178,6 +178,9 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
+  .z-1000 {
+    z-index: 1000;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -317,7 +320,7 @@
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
 }
-body,html {
+body, html {
   background: linear-gradient(to left, rgb(244, 244, 244), rgb(253, 209, 216));
   display: grid;
 }
@@ -355,7 +358,7 @@ body,html {
   left: 13.2rem;
   cursor: pointer;
   border-radius: 9px;
-  padding: .3em .6em;
+  padding: 0.3em 0.6em;
   border: none;
 }
 form {
@@ -396,12 +399,14 @@ textarea {
   gap: 1em;
 }
 .jobItem, .savedJobItem {
+  position: relative;
+  overflow: hidden;
   box-shadow: 1px 1px 10px rgb(218, 217, 217);
   display: flex;
   gap: 1em;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1em .5em;
+  padding: 1em 0.5em;
   border-radius: 12px;
   background: #fffdfc;
 }
@@ -418,38 +423,52 @@ textarea {
 }
 .job-application-btns {
   display: flex;
-  gap: .8em;
+  gap: 0.8em;
 }
 .role-container, .date-container {
   display: flex;
-  gap: .4em;
+  gap: 0.4em;
 }
 .newApp, .editBtn, .saveBtn, .deleteBtn {
   display: flex;
   justify-content: center;
   border: 1px solid #000;
-  padding: .2em;
+  padding: 0.2em;
   width: 55px;
   border-radius: 8px;
 }
 .newApp {
   width: fit-content;
   border: none;
-  padding: .2em .3em;
+  padding: 0.2em 0.3em;
 }
 .editBtn {
   background-color: #f4e5ea;
   border-radius: 9px;
   width: fit-content;
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   border: none;
 }
 .saveBtn {
-  background: linear-gradient(155deg, rgba(244, 114, 182, 0.4), rgba(251, 146, 60, 0.5));
+  background: linear-gradient( 155deg, rgba(244, 114, 182, 0.4), rgba(251, 146, 60, 0.5) );
   border: none;
 }
 .deleteBtn {
   border: none;
+}
+.status {
+  background: rgb(246, 214, 246);
+  width: fit-content;
+  padding: 0.2em 0.8em;
+  border-radius: 16px;
+}
+@media (min-width: 768px) {
+  .job-application-btns {
+    position: absolute;
+    right: 1.5em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 @property --tw-border-style {
   syntax: "*";
